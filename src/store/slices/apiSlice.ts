@@ -1,7 +1,14 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-import { SwapiPerson } from '../../types/people';
-import { SwapiResponse } from '../../types/response';
+import {
+  SwapiFilm,
+  SwapiPerson,
+  SwapiPlanet,
+  SwapiResponse,
+  SwapiSpecie,
+  SwapiStarship,
+  SwapiVehicle
+} from '../../types/entities';
 
 export const swapiApi = createApi({
   reducerPath: 'swapiApi',
@@ -9,54 +16,47 @@ export const swapiApi = createApi({
     baseUrl: 'https://swapi.dev/api/'
   }),
   endpoints: (builder) => ({
-    getPeople: builder.query({
-      query: (page) => `people/?page=${page}`,
-      transformResponse: (response: SwapiResponse<SwapiPerson[]>) => {
-        return {
-          result: response.results.map((person: SwapiPerson) => {
-            return {
-              ...person,
-              id: person.url
-            };
-          }),
-          count: response.count,
-          next: response
-        };
-      }
+    getPeople: builder.query<SwapiResponse<SwapiPerson[]>, void>({
+      query: (page) => `people/?page=${page}`
     }),
-    // getPerson: builder.query({
-    //   query: (id) => `people/${id}`
-    // }),
-    getPlanets: builder.query({
+    getPerson: builder.query<SwapiPerson, string>({
+      query: (id) => `people/${id}`
+    }),
+
+    getPlanets: builder.query<SwapiResponse<SwapiPlanet[]>, void>({
       query: (page) => `planets/?page=${page}`
     }),
-    // getPlanet: builder.query({
-    //   query: (id) => `planets/${id}`
-    // }),
-    getSpecies: builder.query({
+    getPlanet: builder.query<SwapiPlanet, string>({
+      query: (id) => `planets/${id}`
+    }),
+
+    getSpecies: builder.query<SwapiResponse<SwapiSpecie[]>, void>({
       query: (page) => `species/?page=${page}`
     }),
-    // getSpecie: builder.query({
-    //   query: (id) => `species/${id}`
-    // }),
-    getFilms: builder.query({
+    getSpecie: builder.query<SwapiSpecie, string>({
+      query: (id) => `species/${id}`
+    }),
+
+    getFilms: builder.query<SwapiResponse<SwapiFilm[]>, void>({
       query: (page) => `films/?page=${page}`
     }),
-    // getFilm: builder.query({
-    //   query: (id) => `films/${id}`
-    // }),
-    getStarships: builder.query({
+    getFilm: builder.query<SwapiFilm, string>({
+      query: (id) => `films/${id}`
+    }),
+
+    getStarships: builder.query<SwapiResponse<SwapiStarship[]>, void>({
       query: (page) => `starships/?page=${page}`
     }),
-    // getStarship: builder.query({
-    //   query: (id) => `starships/${id}`
-    // }),
-    getVehicles: builder.query({
+    getStarship: builder.query<SwapiStarship, string>({
+      query: (id) => `starships/${id}`
+    }),
+
+    getVehicles: builder.query<SwapiResponse<SwapiVehicle[]>, void>({
       query: (page) => `vehicles/?page=${page}`
+    }),
+    getVehicle: builder.query<SwapiVehicle, string>({
+      query: (id) => `vehicles/${id}`
     })
-    // getVehicle: builder.query({
-    //   query: (id) => `vehicles/${id}`
-    // })
   })
 });
 

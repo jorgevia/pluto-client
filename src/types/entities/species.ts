@@ -1,4 +1,4 @@
-export interface SwapiSpecies {
+export interface SwapiSpecie {
   name: string;
   classification: string;
   designation: string;
