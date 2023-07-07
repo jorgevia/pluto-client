@@ -1,4 +1,9 @@
 {
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
   "env": {
     "browser": true,
     "es2021": true,
@@ -16,6 +21,16 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "plugins": ["react", "@typescript-eslint"],
-  "rules": {}
+  "plugins": ["react", "@typescript-eslint", "simple-import-sort"],
+  "ignorePatterns": ["webpack/*", "jest.config.js", "node_modules/*"],
+  "rules": {
+    "simple-import-sort/imports": [
+      "error",
+      {
+        "groups": [["^react", "^@?\\w"], ["^@/.*"], ["^.+\\.?(scss)$"]]
+      }
+    ],
+    "simple-import-sort/exports": "error",
+    "react/react-in-jsx-scope": "off"
+  }
 }
