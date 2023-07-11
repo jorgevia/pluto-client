@@ -1,0 +1,10 @@
+.list {
+  background-color: rgb(18, 49, 77, 0.8);
+  padding: 1rem;
+  color: #fff;
+  border-radius: 0.4rem;
+  cursor: pointer;
+  &:hover {
+    background-color: rgba(8, 24, 38, 0.9);
+  }
+}

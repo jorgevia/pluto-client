@@ -1,0 +1,28 @@
+.sidebar {
+  height: 100vh;
+  color: white;
+  padding: 1rem 1.2rem;
+  background-color: black;
+  background-image: url('../../assets/sidebar-sw.jpg');
+  background-repeat: no-repeat;
+  background-position: bottom;
+  &__nav {
+    &__wrapper {
+      list-style-type: none;
+      padding: 0;
+      font-size: 1.4rem;
+      &__item {
+        &__link {
+          text-decoration: none;
+          color: #fff;
+          display: block;
+          padding: 0.2rem 0;
+          font-weight: bold;
+          &:hover {
+            color: #f1d956;
+          }
+        }
+      }
+    }
+  }
+}

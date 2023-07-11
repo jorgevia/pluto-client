@@ -1,10 +1,8 @@
 import { Outlet } from 'react-router-dom';
-import { Link } from 'react-router-dom';
 
 import './Home.scss';
 
-import { useGetPeopleQuery } from '../../store/slices/apiSlice';
-import { routesUrls } from '../../types/routes';
+import Sidebar from '../../components/Sidebar/Sidebar';
 
 type HomeProps = {
   className?: string;
@@ -12,20 +10,11 @@ type HomeProps = {
 
 export const Home = ({ className = '' }: HomeProps) => {
   return (
-    <>
-      <aside>
-        <header>Logo</header>
-        <nav>
-          {Object.values(routesUrls).map((route) => (
-            <div key={route}>
-              <Link to={route}>{route}</Link>
-            </div>
-          ))}
-        </nav>
-      </aside>
-      <div className={`home ${className}`}>
+    <div className="home">
+      <Sidebar className="home__sidebar" />
+      <div className={`home__content ${className}`}>
         <Outlet />
       </div>
-    </>
+    </div>
   );
 };

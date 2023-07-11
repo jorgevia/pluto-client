@@ -2,9 +2,9 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import './App.scss';
 
+import { SwapiEntities, swapiRoutes } from './configs/routes';
+import { Entity } from './pages/Entity/Entity';
 import { Home } from './pages/Home';
-import { routesUrls } from './types/routes';
-// const TimesheetsApp = React.lazy(async () => await import("timesheets/router"))
 
 const router = createBrowserRouter([
   {
@@ -15,9 +15,9 @@ const router = createBrowserRouter([
         index: true,
         element: <div>Dashboard</div>
       },
-      ...Object.values(routesUrls).map((route) => ({
+      ...swapiRoutes.map((route: string) => ({
         path: `${route}/:id?`,
-        element: <div>Entities</div>
+        element: <Entity entity={route as SwapiEntities} />
       }))
     ]
   }
