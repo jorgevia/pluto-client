@@ -14,7 +14,9 @@ const Sidebar = ({ className = '' }: SidebarProps) => {
     <aside className={`sidebar ${className}`}>
       <header className="sidebar__header">
         <div className="sidebar__header__logo">
-          <img src="/star-wars-logo.png" alt="Star Wars Logo" />
+          <Link to="/">
+            <img src="/star-wars-logo.png" alt="Star Wars Logo" />
+          </Link>
         </div>
       </header>
       <nav className="sidebar__nav">

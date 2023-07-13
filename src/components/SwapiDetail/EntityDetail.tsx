@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import * as React from 'react';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { QueryStatus } from '@reduxjs/toolkit/dist/query';
@@ -9,6 +10,7 @@ import Card from '../../components/ui/Card/Card';
 import { type entityGroups, entityToName, translateToEntity } from '../../configs/entities';
 import { entityDetailComponent } from '../../configs/entitiesComponents';
 import { getSwapiRoute, SwapiEntities } from '../../configs/routes';
+import { setPopularitem, usePopularItems } from '../../providers/PopularItemsProvider';
 import { useGetEntityByIdQuery, usePrefetch } from '../../store/slices/apiSlice';
 import { SwapiItems } from '../../types/entities';
 import SwapiContainer from '../SwapiContainer/SwapiContainer';
@@ -35,6 +37,7 @@ const getEntityGroups = (entity?: SwapiItems) => {
 };
 
 const EntityDetail = ({ className = '', entity }: EntityDetailProps) => {
+  const { dispatch } = usePopularItems();
   const navigate = useNavigate();
   const { id: entityId } = useParams<{ id?: string }>();
   const prefetch = usePrefetch('getEntitiesByUrl');
@@ -45,6 +48,17 @@ const EntityDetail = ({ className = '', entity }: EntityDetailProps) => {
   const handleClick = (url: string) => {
     navigate(getSwapiRoute(url));
   };
+
+  React.useEffect(() => {
+    if (data) {
+      console.log({ entity, data });
+      setPopularitem(dispatch, {
+        entity,
+        url: data.url,
+        title: (data as any).name || (data as any).title
+      });
+    }
+  }, [data]);
 
   return (
     <div className={`entity-detail ${className}`}>

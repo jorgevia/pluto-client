@@ -3,6 +3,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './App.scss';
 
 import { SwapiEntities, swapiRoutes } from './configs/routes';
+import Dashboard from './pages/Dashboard/Dashboard';
 import { Entity } from './pages/Entity/Entity';
 import { Home } from './pages/Home';
 
@@ -13,7 +14,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <div>Dashboard</div>
+        element: <Dashboard />
       },
       ...swapiRoutes.map((route: string) => ({
         path: `${route}/:id?`,
