@@ -4,40 +4,21 @@ import { QueryStatus } from '@reduxjs/toolkit/dist/query';
 
 import './EntityList.scss';
 
+import { entityListComponent } from '../../configs/entitiesComponents';
 import { getSwapiRoute, SwapiEntities } from '../../configs/routes';
 import { useGetEntityQuery } from '../../store/slices/apiSlice';
-import { SwapiResponse } from '../../types/entities';
+import { List } from '../List/List';
+import SwapiContainer from '../SwapiContainer/SwapiContainer';
+import Paginator from '../ui/Paginator/Paginator';
 import Spinner from '../ui/Spinner/Spinner';
-import {
-  FilmsList,
-  PeopleList,
-  PlanetsList,
-  SpeciesList,
-  StarshipsList,
-  VehiclesList
-} from './entitesList';
-import SwapiListContainer from './SwapiListContainer';
 
 type EntityListProps = {
   className?: string;
   entity: SwapiEntities;
 };
 
-const entityListComponent: {
-  [key in SwapiEntities]: React.FC<{
-    data: SwapiResponse<unknown[]>;
-    onClick: (url: string) => void;
-  }>;
-} = {
-  films: FilmsList,
-  people: PeopleList,
-  planets: PlanetsList,
-  species: SpeciesList,
-  starships: StarshipsList,
-  vehicles: VehiclesList
-};
-
 const EntityList = ({ className = '', entity }: EntityListProps) => {
+  const previousEntity = React.useRef(entity);
   const navigate = useNavigate();
   const [page, setPage] = React.useState(1);
   const { data, status } = useGetEntityQuery({ entity, page });
@@ -47,15 +28,39 @@ const EntityList = ({ className = '', entity }: EntityListProps) => {
     navigate(getSwapiRoute(url));
   };
 
-  if (status === QueryStatus.pending) return <Spinner />;
+  React.useEffect(() => {
+    if (previousEntity.current !== entity) {
+      setPage(1);
+      previousEntity.current = entity;
+    }
+  }, [entity]);
+
   if (status === QueryStatus.rejected) return <div>Error getting data</div>;
 
   return (
-    <SwapiListContainer entity={entity}>
-      <div className="entity-list__container">
-        <SwapiList data={data as SwapiResponse<unknown[]>} onClick={handleClick} />
-      </div>
-    </SwapiListContainer>
+    <div className={`entity-list ${className}`}>
+      {status === QueryStatus.pending && <Spinner />}
+      <SwapiContainer className="entity-list__container" entity={entity}>
+        {data && (
+          <>
+            <div className="entity-list__container__list-wrapper">
+              {data.results.map((item) => (
+                <List key={item.url} onClick={() => handleClick(item.url)}>
+                  <SwapiList data={item} />
+                </List>
+              ))}
+            </div>
+            <Paginator
+              className="entity-list__container__paginator"
+              count={data.count}
+              total={10}
+              page={page}
+              onClick={setPage}
+            />
+          </>
+        )}
+      </SwapiContainer>
+    </div>
   );
 };
 

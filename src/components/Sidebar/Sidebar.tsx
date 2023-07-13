@@ -2,7 +2,8 @@ import { Link } from 'react-router-dom';
 
 import './Sidebar.scss';
 
-import { routesToPageName, swapiRoutes } from '../../configs/routes';
+import { entityToName } from '../../configs/entities';
+import { swapiRoutes } from '../../configs/routes';
 
 type SidebarProps = {
   className?: string;
@@ -13,7 +14,7 @@ const Sidebar = ({ className = '' }: SidebarProps) => {
     <aside className={`sidebar ${className}`}>
       <header className="sidebar__header">
         <div className="sidebar__header__logo">
-          <img src="./star-wars-logo.png" alt="Star Wars Logo" />
+          <img src="/star-wars-logo.png" alt="Star Wars Logo" />
         </div>
       </header>
       <nav className="sidebar__nav">
@@ -21,7 +22,7 @@ const Sidebar = ({ className = '' }: SidebarProps) => {
           {swapiRoutes.map((route) => (
             <li className="sidebar__nav__wrapper__item" key={route}>
               <Link className="sidebar__nav__wrapper__item__link" to={route}>
-                {routesToPageName[route]}
+                {entityToName[route]}
               </Link>
             </li>
           ))}

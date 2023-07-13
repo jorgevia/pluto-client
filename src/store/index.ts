@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import { swapiApi as api } from './slices/apiSlice';
+import { swapiSlice as api } from './slices/apiSlice';
 
 export const store = configureStore({
   reducer: {

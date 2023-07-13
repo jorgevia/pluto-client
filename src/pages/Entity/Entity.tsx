@@ -2,16 +2,15 @@ import { useParams } from 'react-router-dom';
 
 import './Entity.scss';
 
+import EntityDetail from '../../components/SwapiDetail/EntityDetail';
 import EntityList from '../../components/SwapiList/EntityList';
 import { SwapiEntities } from '../../configs/routes';
 
 type EntityProps = {
   entity: SwapiEntities;
-  className?: string;
 };
 
-export const Entity = ({ entity, className = '' }: EntityProps) => {
+export const Entity = ({ entity }: EntityProps) => {
   const params = useParams<{ id?: string }>();
-  if (!params.id) return <EntityList entity={entity} />;
-  return <div>I have id!! so we are going to render the entity page</div>;
+  return !params.id ? <EntityList entity={entity} /> : <EntityDetail entity={entity} />;
 };

@@ -9,7 +9,6 @@ export function isEntity(url: string, entity: SwapiEntities) {
 
 export function getEntity(url: string) {
   const match = url.match(regex);
-  console.log({ match });
   if (!match) return null;
   return match[1];
 }

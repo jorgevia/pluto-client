@@ -1,5 +1,10 @@
 .home {
   display: grid;
-  grid-template-rows: 1fr;
   grid-template-columns: 250px 1fr;
+  height: 100vh;
+  &__sidebar,
+  &__content {
+    height: 100%;
+    box-sizing: border-box;
+  }
 }
