@@ -3,6 +3,9 @@
   align-items: center;
   gap: 0.8rem;
   flex-wrap: wrap;
+  &--center {
+    justify-content: center;
+  }
   &__item {
     color: #fff;
     text-decoration: none;
@@ -28,5 +31,11 @@
         color: #eaa53e;
       }
     }
+  }
+  &__empty {
+    color: #fff;
+    font-size: 1.2rem;
+    text-align: center;
+    width: 100%;
   }
 }

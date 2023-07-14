@@ -13,7 +13,7 @@ const Dashboard = () => {
           src="/star-wars-logo-big.png"
           alt="Star Wars logo"
         />
-        <h3 className="dashboard__header__copy">Welcome to the Star Wars info page</h3>
+        <h3 className="dashboard__header__copy">Welcome to the Star Wars site</h3>
       </header>
       <div className="dashboard__content">
         <h5 className="dashboard__content__title">POPULAR ITEMS</h5>

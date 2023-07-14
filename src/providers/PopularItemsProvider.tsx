@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-// import { EntityItems } from '../components/SwapiList/EntityList';
+import { storageKey } from '../configs/popularItems';
 import { SwapiEntities } from '../configs/routes';
 import useLocalStorageState from '../hooks/useLocalStorage';
 
@@ -24,8 +24,6 @@ type PopularItemsContext = {
   popularItems: PopularItems;
   dispatch: React.Dispatch<React.SetStateAction<PopularItems>>;
 };
-
-const storageKey = 'popularItems';
 
 const PropularItemsContext = React.createContext<PopularItemsContext | null>(null);
 
