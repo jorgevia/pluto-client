@@ -24,8 +24,8 @@ type EntityListProps = {
 const EntityList = ({ className = '', entity }: EntityListProps) => {
   const query = useQuery();
   const q = query.get('q') || undefined;
+  const page = Number(query.get('page')) || 1;
   const navigate = useNavigate();
-  const [page, setPage] = React.useState(1);
   const { data, status } = useGetEntityQuery({ entity, page, query: q });
   const SwapiList = entityListComponent[entity];
 
@@ -59,8 +59,6 @@ const EntityList = ({ className = '', entity }: EntityListProps) => {
               className="entity-list__container__paginator"
               count={data.count}
               total={10}
-              page={page}
-              onClick={setPage}
             />
           </>
         )}

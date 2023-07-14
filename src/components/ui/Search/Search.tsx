@@ -1,10 +1,9 @@
 import * as React from 'react';
-import { useParams } from 'react-router-dom';
 import { Form, useSubmit } from 'react-router-dom';
 
 import './Search.scss';
 
-import { useQuery } from '../../../hooks/useQueryParams';
+import { useQuery, useReplaceUrlQuery } from '../../../hooks/useQueryParams';
 
 const Search = () => {
   const query = useQuery();
