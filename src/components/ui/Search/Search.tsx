@@ -1,37 +1,38 @@
 import * as React from 'react';
+import { useParams } from 'react-router-dom';
+import { Form, useSubmit } from 'react-router-dom';
 
 import './Search.scss';
 
-type SearchProps = {
-  value: string;
-  onSearch: (query: string) => void;
-};
+import { useQuery } from '../../../hooks/useQueryParams';
 
-const Search = ({ onSearch, value }: SearchProps) => {
+const Search = () => {
+  const query = useQuery();
+
   const inputRef = React.useRef<HTMLInputElement>(null);
+  const submit = useSubmit();
 
   const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const value = inputRef.current?.value;
-    if (value) {
-      onSearch(inputRef.current.value || '');
-    }
+    submit(event.currentTarget.form);
   };
 
-  const handleClearClick = () => {
-    onSearch('');
+  const handleClearClick = (event: React.FormEvent<HTMLButtonElement>) => {
+    if (inputRef.current) {
+      inputRef.current.value = '';
+      submit(event.currentTarget.form);
+    }
   };
 
   return (
     <div className="search">
-      <form className="search__form" onSubmit={handleFormSubmit}>
+      <Form className="search__form" onSubmit={handleFormSubmit}>
         <div className="search__form__input-wrapper">
           <input
             className="search__form__input-wrapper__input"
-            name="search"
+            name="q"
             ref={inputRef}
             type="text"
-            defaultValue={value}
+            defaultValue={query.get('q') || ''}
             placeholder="Search by name/title"
           />
           <button
@@ -46,7 +47,7 @@ const Search = ({ onSearch, value }: SearchProps) => {
             SEARCH
           </button>
         </div>
-      </form>
+      </Form>
     </div>
   );
 };

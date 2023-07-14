@@ -11,8 +11,12 @@ export const swapiSlice = createApi({
     baseUrl: `${swapiBaseurl}/`
   }),
   endpoints: (builder) => ({
-    getEntity: builder.query<SwapiResponse<SwapiItems[]>, { entity: SwapiEntities; page: number }>({
-      query: ({ entity, page }) => `${entity}/?page=${page}`
+    getEntity: builder.query<
+      SwapiResponse<SwapiItems[]>,
+      { entity: SwapiEntities; page: number; query?: string }
+    >({
+      query: ({ entity, page, query }) =>
+        `${entity}/?page=${page}${query ? '&search=' + query : ''}`
     }),
     getEntityById: builder.query<SwapiItems, { entity: SwapiEntities; id?: string }>({
       query: ({ entity, id }: { entity: SwapiEntities; id: string }) => `${entity}/${id}`
