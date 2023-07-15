@@ -22,6 +22,7 @@ type EntityListProps = {
 };
 
 const EntityList = ({ className = '', entity }: EntityListProps) => {
+  const entityRef = React.useRef(entity);
   const query = useQuery();
   const q = query.get('q') || undefined;
   const page = Number(query.get('page')) || 1;
@@ -33,35 +34,49 @@ const EntityList = ({ className = '', entity }: EntityListProps) => {
     navigate(getSwapiRoute(url));
   };
 
-  if (status === QueryStatus.rejected) return <div>Error getting data</div>;
+  React.useEffect(() => () => {
+    entityRef.current = entity;
+  });
+
+  // Handled by ErrorBoundary
+  if (status === QueryStatus.rejected) throw new Error('Error fetching list data');
+
+  const header = (
+    <EntityHeader className="entity-list__header">
+      <ContentWrapper rightContent={<Search />}>
+        <h1 className="entity-list__header__title">{`${entityToName[
+          entity
+        ].toUpperCase()} LIST`}</h1>
+      </ContentWrapper>
+    </EntityHeader>
+  );
+
+  const getDataList = () => {
+    if (!data) return null;
+    if (status === QueryStatus.pending && entityRef.current !== entity) return null;
+
+    if (!data.results.length) {
+      return <div className="entity-list__empty">NO RESULT FOUND</div>;
+    }
+
+    return (
+      <>
+        {data.results.map((item) => (
+          <List key={item.url} onClick={() => handleClick(item.url)}>
+            <SwapiList data={item} />
+          </List>
+        ))}
+        <Paginator className="entity-list__container__paginator" count={data.count} total={10} />
+      </>
+    );
+  };
 
   return (
     <div className={`entity-list ${className}`}>
-      <EntityHeader className="entity-list__header">
-        <ContentWrapper rightContent={<Search />}>
-          <h1 className="entity-list__header__title">{`${entityToName[
-            entity
-          ].toUpperCase()} LIST`}</h1>
-        </ContentWrapper>
-      </EntityHeader>
+      {header}
       {status === QueryStatus.pending && <Spinner />}
       <SwapiContainer className="entity-list__container" entity={entity}>
-        {data && (
-          <>
-            <div className="entity-list__container__list-wrapper">
-              {data.results.map((item) => (
-                <List key={item.url} onClick={() => handleClick(item.url)}>
-                  <SwapiList data={item} />
-                </List>
-              ))}
-            </div>
-            <Paginator
-              className="entity-list__container__paginator"
-              count={data.count}
-              total={10}
-            />
-          </>
-        )}
+        <div className="entity-list__container__list-wrapper">{getDataList()}</div>
       </SwapiContainer>
     </div>
   );

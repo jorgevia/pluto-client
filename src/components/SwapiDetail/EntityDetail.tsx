@@ -60,10 +60,13 @@ const EntityDetail = ({ className = '', entity }: EntityDetailProps) => {
     }
   }, [data]);
 
+  // Handled by ErrorBoundary
+  if (status === QueryStatus.rejected) throw new Error('Error fetching datail data');
+
   return (
     <div className={`entity-detail ${className}`}>
       {status === QueryStatus.pending && <Spinner />}
-      {data && (
+      {data && status === QueryStatus.fulfilled && (
         <>
           <SwapiContainer entity={entity}>
             <SwapiDetailComponent data={data} />
