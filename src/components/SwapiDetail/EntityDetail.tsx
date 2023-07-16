@@ -51,7 +51,6 @@ const EntityDetail = ({ className = '', entity }: EntityDetailProps) => {
 
   React.useEffect(() => {
     if (data) {
-      console.log({ entity, data });
       setPopularitem(dispatch, {
         entity,
         url: data.url,
@@ -64,7 +63,7 @@ const EntityDetail = ({ className = '', entity }: EntityDetailProps) => {
   if (status === QueryStatus.rejected) throw new Error('Error fetching datail data');
 
   return (
-    <div className={`entity-detail ${className}`}>
+    <div className={`entity-detail ${className}`} data-testid="entity-detail">
       {status === QueryStatus.pending && <Spinner />}
       {data && status === QueryStatus.fulfilled && (
         <>

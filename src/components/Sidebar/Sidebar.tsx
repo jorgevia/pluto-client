@@ -15,7 +15,7 @@ const Sidebar = ({ className = '' }: SidebarProps) => {
   const actualRoute = pathname.slice(1);
   const prefetch = usePrefetch('getEntity');
   return (
-    <aside className={`sidebar ${className}`}>
+    <aside className={`sidebar ${className}`} data-testid={"sidebar"}>
       <header className="sidebar__header">
         <div className="sidebar__header__logo">
           <Link to="/">
