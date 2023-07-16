@@ -4,7 +4,7 @@ const Spinner = () => {
   return (
     <>
       <div className="spinner-mask" />
-      <div className="spinner" />
+      <div className="spinner" data-testid="spinner" />
     </>
   );
 };
