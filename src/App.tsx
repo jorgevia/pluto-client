@@ -1,11 +1,14 @@
+import * as React from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import './App.scss';
 
+import Spinner from './components/ui/Spinner/Spinner';
 import { SwapiEntities, swapiRoutes } from './configs/routes';
-import Dashboard from './pages/Dashboard/Dashboard';
-import { Entity } from './pages/Entity/Entity';
 import { Home } from './pages/Home';
+
+const Entity = React.lazy(async () => await import('./pages/Entity/Entity'));
+const Dashboard = React.lazy(async () => await import('./pages/Dashboard/Dashboard'));
 
 const router = createBrowserRouter([
   {
@@ -25,7 +28,11 @@ const router = createBrowserRouter([
 ]);
 
 const App = () => {
-  return <RouterProvider router={router} />;
+  return (
+    <React.Suspense fallback={<Spinner />}>
+      <RouterProvider router={router} />
+    </React.Suspense>
+  );
 };
 
 export default App;

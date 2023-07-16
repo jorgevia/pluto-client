@@ -1,15 +1,19 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import './Sidebar.scss';
 
 import { entityToName } from '../../configs/entities';
 import { swapiRoutes } from '../../configs/routes';
+import { usePrefetch } from '../../store/slices/apiSlice';
 
 type SidebarProps = {
   className?: string;
 };
 
 const Sidebar = ({ className = '' }: SidebarProps) => {
+  const { pathname } = useLocation();
+  const actualRoute = pathname.slice(1);
+  const prefetch = usePrefetch('getEntity');
   return (
     <aside className={`sidebar ${className}`}>
       <header className="sidebar__header">
@@ -23,7 +27,12 @@ const Sidebar = ({ className = '' }: SidebarProps) => {
         <ul className="sidebar__nav__wrapper">
           {swapiRoutes.map((route) => (
             <li className="sidebar__nav__wrapper__item" key={route}>
-              <Link className="sidebar__nav__wrapper__item__link" to={route}>
+              <Link
+                onMouseEnter={() => prefetch({ entity: route, page: 1 })}
+                className={`sidebar__nav__wrapper__item__link ${
+                  actualRoute === route ? 'sidebar__nav__wrapper__item__link--active' : ''
+                }`}
+                to={route}>
                 {entityToName[route]}
               </Link>
             </li>

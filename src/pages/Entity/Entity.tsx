@@ -12,7 +12,7 @@ type EntityProps = {
   entity: SwapiEntities;
 };
 
-export const Entity = ({ entity }: EntityProps) => {
+const Entity = ({ entity }: EntityProps) => {
   const params = useParams<{ id?: string }>();
 
   return (
@@ -23,3 +23,5 @@ export const Entity = ({ entity }: EntityProps) => {
     </div>
   );
 };
+
+export default Entity;
