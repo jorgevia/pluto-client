@@ -1,0 +1,8 @@
+.entity-detail {
+  &__groups {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+}

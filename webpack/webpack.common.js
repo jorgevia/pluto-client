@@ -10,7 +10,7 @@ module.exports = {
       template: path.resolve(__dirname, '../src/index.html')
     }),
     new CopyPlugin({
-      patterns: [{ from: path.resolve(__dirname, '../src/icons') }]
+      patterns: [{ from: path.resolve(__dirname, '../src/assets') }]
     }),
     new MiniCssExtractPlugin()
   ],
@@ -24,14 +24,6 @@ module.exports = {
       {
         test: /\.s[ac]ss$/i,
         use: ['style-loader', 'css-loader', 'sass-loader']
-      },
-      {
-        test: /\.(png|svg|jpg|jpeg|gif|ico)$/i,
-        type: 'asset/resource'
-      },
-      {
-        test: /\.(woff|woff2|eot|ttf|otf)$/i,
-        type: 'asset/resource'
       }
     ]
   },
@@ -40,6 +32,7 @@ module.exports = {
   },
   output: {
     filename: 'bundle.js',
+    publicPath: '/',
     path: path.resolve(__dirname, '../build'),
     clean: true
   }

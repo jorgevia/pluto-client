@@ -1,0 +1,41 @@
+.popular-items {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+  &--center {
+    justify-content: center;
+  }
+  &__item {
+    color: #fff;
+    text-decoration: none;
+    box-sizing: border-box;
+    font-size: 1.2rem;
+    border-radius: 0.4rem;
+    min-width: 32.5%;
+    padding: 0.4rem;
+    background-color: #15273c;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    &:hover {
+      background-color: lighten(#15273c, 10%);
+    }
+    &__entity {
+      font-size: 0.8rem;
+    }
+    &__title {
+      font-size: 1.6rem;
+      font-weight: bold;
+      .popular-items__item:hover & {
+        color: #eaa53e;
+      }
+    }
+  }
+  &__empty {
+    color: #fff;
+    font-size: 1.2rem;
+    text-align: center;
+    width: 100%;
+  }
+}
