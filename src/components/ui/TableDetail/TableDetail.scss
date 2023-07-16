@@ -1,0 +1,25 @@
+.detail-table {
+  color: #fff;
+  &__header {
+    &__title {
+      font-weight: bold;
+      font-size: 2rem;
+    }
+  }
+  &__table {
+    display: table;
+    &__row {
+      display: table-row;
+      &__cell {
+        padding: 0.5rem 0;
+        display: table-cell;
+        &--header {
+          padding-right: 0.5rem;
+        }
+        &--value {
+          font-weight: bold;
+        }
+      }
+    }
+  }
+}
