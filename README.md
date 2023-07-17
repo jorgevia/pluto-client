@@ -32,7 +32,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 ## 📖 Project Summary
 
-This project is a challenge for Pluto TV. It is a simple app that displays a list of resources and allows the user to filter them by genre. Also tracks the nine most popular items and allows the user to search items by name. The app is built with React and Redux Toolkit (RTK Query). It uses React Router for routing and Redux Toolkit for state management.
+This project is a challenge for Pluto TV. It is a simple app that displays a list of resources and allows the user to navigate through them. It also tracks the 9 most popular items and allows the user to search items by name. The app is built with React and Redux Toolkit (RTK Query). It uses React Router for routing and Redux Toolkit for state management.
 
 ## 📖 Testing
 
