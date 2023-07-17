@@ -30,10 +30,6 @@ npm start
 
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-## 📖 Project Summary
-
-This project is a challenge for Pluto TV. It is a simple app that displays a list of resources and allows the user to navigate through them. It also tracks the 9 most popular items and allows the user to search items by name. The app is built with React and Redux Toolkit (RTK Query). It uses React Router for routing and Redux Toolkit for state management.
-
 ## 📖 Testing
 
 This project uses React Testing Library for testing. To run the tests, run the following command:
@@ -41,6 +37,10 @@ This project uses React Testing Library for testing. To run the tests, run the f
 ```bash
 npm test
 ```
+
+## 📖 Project Summary
+
+This project is a challenge for Pluto TV. It is a simple app that displays a list of resources and allows the user to navigate through them. It also tracks the 9 most popular items and allows the user to search items by name. The app is built with React and Redux Toolkit (RTK Query). It uses React Router for routing and Redux Toolkit for state management.
 
 ## 📚 Libraries Used
 
